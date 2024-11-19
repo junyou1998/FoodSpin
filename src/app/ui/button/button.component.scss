@@ -1,0 +1,26 @@
+:host{
+    button{
+        border: none;
+        outline: none;
+        display: inline-block;
+        cursor: pointer;
+        font-size: 0.875rem;
+        font-weight: 700;
+        padding: .75rem 2.25rem;
+        border-radius: 10rem;
+        background-color: #FF922C;
+        box-shadow: 0 0.75rem 2.25rem rgba(#FF922C, 0.25);
+        color: #fff;
+    }
+    &.round-button{
+        button{
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+        }
+    }
+}
