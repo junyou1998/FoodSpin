@@ -22,9 +22,13 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class SpinComponent {
 
+  focus = 0;
+  isAnimating = false;
   items: InputSignal<Product[]> = input<Product[]>([]);
-  count = computed(() => this.items().length);
-  degUnit = computed(() => 360 / this.count());
+  private animationTimeout: any;
+  private count = computed(() => this.items().length);
+  private degUnit = computed(() => 360 / this.count());
+  private nowDegree = 0;
 
   itemEffect = effect(() => {
     if (!this.items()) return;
@@ -34,10 +38,6 @@ export class SpinComponent {
       this.item.toArray()[index].nativeElement.style.transform = transform;
     });
   });
-
-  focus = 0;
-  isAnimating = false;
-  nowDegree = 0;
 
   @ViewChild('spinContent') spinContent!: ElementRef;
   @ViewChildren('item') item!: QueryList<ElementRef>;
@@ -56,7 +56,8 @@ export class SpinComponent {
 
   private triggerAnimation() {
     this.isAnimating = true;
-    setTimeout(() => {
+    clearTimeout(this.animationTimeout);
+    this.animationTimeout = setTimeout(() => {
       this.isAnimating = false;
     }, 500);
   }
@@ -91,9 +92,4 @@ export class SpinComponent {
   //   this.triggerAnimation();
 
   // }
-}
-function VideChildren(
-  arg0: string
-): (target: SpinComponent, propertyKey: 'item') => void {
-  throw new Error('Function not implemented.');
 }
